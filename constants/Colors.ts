@@ -20,5 +20,7 @@ export default {
     twitter: '#1F8DEF',
     gray: '#292B2D',
     gray2: '#656B72',
+    black: '#000',
+    white: '#fff',
   },
 };

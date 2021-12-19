@@ -12,10 +12,16 @@ import {
   SimpleLineIcons,
 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
+import { FloatButton } from '../components/FloatButton';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -27,13 +33,19 @@ import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+  const navigationRef = useNavigationContainerRef();
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
-      <RootNavigator />
-    </NavigationContainer>
+    <>
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+        ref={navigationRef}
+      >
+        <RootNavigator />
+      </NavigationContainer>
+      <FloatButton test={navigationRef} />
+    </>
   );
 }
 
@@ -65,94 +77,97 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      screenOptions={({ navigation }) => ({
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        tabBarShowLabel: false,
-        headerStyle: { borderBottomColor: Colors.common.gray, borderBottomWidth: 1 },
-        headerLeft: () => (
-          <MaterialIcons
-            name="account-circle"
-            size={25}
-            color={Colors.common.twitter}
-            style={{ marginLeft: 10 }}
-          />
-        ),
-        headerTitle: () => <FontAwesome name="twitter" size={25} color={Colors.common.twitter} />,
-        headerRight: () => (
-          <Pressable
-            onPress={() => navigation.navigate('Modal')}
-            style={({ pressed }) => ({
-              opacity: pressed ? 0.5 : 1,
-            })}
-          >
-            <FontAwesome
-              name="star"
+    <>
+      <BottomTab.Navigator
+        initialRouteName="Home"
+        screenOptions={({ navigation }) => ({
+          tabBarActiveTintColor: Colors[colorScheme].tint,
+          tabBarShowLabel: false,
+          headerStyle: { borderBottomColor: Colors.common.gray, borderBottomWidth: 1 },
+          headerLeft: () => (
+            <MaterialIcons
+              name="account-circle"
               size={25}
               color={Colors.common.twitter}
-              style={{ marginRight: 10 }}
+              style={{ marginLeft: 10 }}
             />
-          </Pressable>
-        ),
-      })}
-    >
-      <BottomTab.Screen
-        name="Home"
-        component={TabOneScreen}
-        options={() => ({
-          title: 'home',
-          tabBarIcon: ({ focused }) => (
-            <Entypo
-              name="home"
-              size={25}
-              color={focused ? Colors.common.twitter : Colors.common.gray2}
-            />
+          ),
+          headerTitle: () => <FontAwesome name="twitter" size={25} color={Colors.common.twitter} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('Modal')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="star"
+                size={25}
+                color={Colors.common.twitter}
+                style={{ marginRight: 10 }}
+              />
+            </Pressable>
           ),
         })}
-      />
-      <BottomTab.Screen
-        name="Search"
-        component={TabTwoScreen}
-        options={{
-          title: 'search',
-          tabBarIcon: ({ focused }) => (
-            <AntDesign
-              name="search1"
-              size={25}
-              color={focused ? Colors.common.twitter : Colors.common.gray2}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Notice"
-        component={TabTwoScreen}
-        options={{
-          title: 'notice',
-          tabBarIcon: ({ focused }) => (
-            <Feather
-              name="bell"
-              size={25}
-              color={focused ? Colors.common.twitter : Colors.common.gray2}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Message"
-        component={TabTwoScreen}
-        options={{
-          title: 'message',
-          tabBarIcon: ({ focused }) => (
-            <SimpleLineIcons
-              name="envelope-letter"
-              size={25}
-              color={focused ? Colors.common.twitter : Colors.common.gray2}
-            />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
+      >
+        <BottomTab.Screen
+          name="Home"
+          component={TabOneScreen}
+          options={() => ({
+            title: 'home',
+            tabBarIcon: ({ focused }) => (
+              <Entypo
+                name="home"
+                size={25}
+                color={focused ? Colors.common.twitter : Colors.common.gray2}
+              />
+            ),
+          })}
+        />
+        <BottomTab.Screen
+          name="Search"
+          component={TabTwoScreen}
+          options={{
+            title: 'search',
+            tabBarIcon: ({ focused }) => (
+              <AntDesign
+                name="search1"
+                size={25}
+                color={focused ? Colors.common.twitter : Colors.common.gray2}
+              />
+            ),
+          }}
+        />
+        <BottomTab.Screen
+          name="Notice"
+          component={TabTwoScreen}
+          options={{
+            title: 'notice',
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name="bell"
+                size={25}
+                color={focused ? Colors.common.twitter : Colors.common.gray2}
+              />
+            ),
+          }}
+        />
+        <BottomTab.Screen
+          name="Message"
+          key="Message"
+          component={TabTwoScreen}
+          options={{
+            title: 'message',
+            tabBarIcon: ({ focused }) => (
+              <SimpleLineIcons
+                name="envelope-letter"
+                size={25}
+                color={focused ? Colors.common.twitter : Colors.common.gray2}
+              />
+            ),
+          }}
+        />
+      </BottomTab.Navigator>
+    </>
   );
 }
