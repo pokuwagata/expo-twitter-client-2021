@@ -28,6 +28,7 @@ module.exports = {
     'react/display-name': 0,
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-namespace': 'off',
   },
   settings: {
     react: {

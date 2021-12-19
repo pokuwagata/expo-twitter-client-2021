@@ -3,7 +3,14 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import {
+  FontAwesome,
+  MaterialIcons,
+  Entypo,
+  AntDesign,
+  Feather,
+  SimpleLineIcons,
+} from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +23,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -59,52 +66,93 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={{
+      initialRouteName="Home"
+      screenOptions={({ navigation }) => ({
         tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}
+        tabBarShowLabel: false,
+        headerStyle: { borderBottomColor: Colors.common.gray, borderBottomWidth: 1 },
+        headerLeft: () => (
+          <MaterialIcons
+            name="account-circle"
+            size={25}
+            color={Colors.common.twitter}
+            style={{ marginLeft: 10 }}
+          />
+        ),
+        headerTitle: () => <FontAwesome name="twitter" size={25} color={Colors.common.twitter} />,
+        headerRight: () => (
+          <Pressable
+            onPress={() => navigation.navigate('Modal')}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}
+          >
+            <FontAwesome
+              name="star"
+              size={25}
+              color={Colors.common.twitter}
+              style={{ marginRight: 10 }}
+            />
+          </Pressable>
+        ),
+      })}
     >
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+        options={() => ({
+          title: 'home',
+          tabBarIcon: ({ focused }) => (
+            <Entypo
+              name="home"
+              size={25}
+              color={focused ? Colors.common.twitter : Colors.common.gray2}
+            />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Search"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'search',
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="search1"
+              size={25}
+              color={focused ? Colors.common.twitter : Colors.common.gray2}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Notice"
+        component={TabTwoScreen}
+        options={{
+          title: 'notice',
+          tabBarIcon: ({ focused }) => (
+            <Feather
+              name="bell"
+              size={25}
+              color={focused ? Colors.common.twitter : Colors.common.gray2}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Message"
+        component={TabTwoScreen}
+        options={{
+          title: 'message',
+          tabBarIcon: ({ focused }) => (
+            <SimpleLineIcons
+              name="envelope-letter"
+              size={25}
+              color={focused ? Colors.common.twitter : Colors.common.gray2}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

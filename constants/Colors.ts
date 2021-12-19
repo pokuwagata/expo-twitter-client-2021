@@ -16,4 +16,9 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+  common: {
+    twitter: '#1F8DEF',
+    gray: '#292B2D',
+    gray2: '#656B72',
+  },
 };
