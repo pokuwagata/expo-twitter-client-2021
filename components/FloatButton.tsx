@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
-import { NavigationContainerRef, useNavigation } from '@react-navigation/native';
+import { NavigationContainerRef } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 
 type Props = {
