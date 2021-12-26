@@ -3,12 +3,14 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import { NavigationContainerRef } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
+import useColorScheme from '../hooks/useColorScheme';
 
 type Props = {
   navigationRef: NavigationContainerRef<ReactNavigation.RootParamList> | null;
 };
 
 export function FloatButton({ navigationRef }: Props) {
+  const colorScheme = useColorScheme();
   const [key, setKey] = useState<string | undefined>();
   useEffect(() => {
     navigationRef?.addListener('state', () => {
@@ -21,12 +23,20 @@ export function FloatButton({ navigationRef }: Props) {
       onPress={() => {
         // setTimesPressed((current) => current + 1);
       }}
-      style={({ pressed }) => [pressed ? styles.pressed : styles.default, styles.button]}
+      style={({ pressed }) => [
+        pressed ? styles.pressed : styles.default,
+        styles.button,
+        { backgroundColor: Colors[colorScheme].floatButton.bgColor },
+      ]}
     >
       {key === 'Message' ? (
-        <MaterialCommunityIcons name="pencil-box-outline" size={24} color={Colors.common.white} />
+        <MaterialCommunityIcons
+          name="pencil-box-outline"
+          size={24}
+          color={Colors[colorScheme].floatButton.color}
+        />
       ) : (
-        <Entypo name="pencil" size={24} color={Colors.common.white} />
+        <Entypo name="pencil" size={24} color={Colors[colorScheme].floatButton.color} />
       )}
     </Pressable>
   );
@@ -37,7 +47,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.common.twitter,
     shadowColor: Colors.common.black,
     shadowOffset: {
       width: 0,

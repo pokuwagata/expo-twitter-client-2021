@@ -83,16 +83,21 @@ function BottomTabNavigator() {
         screenOptions={({ navigation }) => ({
           tabBarActiveTintColor: Colors[colorScheme].tint,
           tabBarShowLabel: false,
-          headerStyle: { borderBottomColor: Colors.common.gray, borderBottomWidth: 1 },
+          headerStyle: {
+            borderBottomColor: Colors[colorScheme].headerBottom,
+            borderBottomWidth: 1,
+          },
           headerLeft: () => (
             <MaterialIcons
               name="account-circle"
               size={25}
-              color={Colors.common.twitter}
+              color={Colors[colorScheme].headerIcon}
               style={{ marginLeft: 10 }}
             />
           ),
-          headerTitle: () => <FontAwesome name="twitter" size={25} color={Colors.common.twitter} />,
+          headerTitle: () => (
+            <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -103,7 +108,7 @@ function BottomTabNavigator() {
               <FontAwesome
                 name="star"
                 size={25}
-                color={Colors.common.twitter}
+                color={Colors[colorScheme].headerIcon}
                 style={{ marginRight: 10 }}
               />
             </Pressable>
@@ -119,7 +124,9 @@ function BottomTabNavigator() {
               <Entypo
                 name="home"
                 size={25}
-                color={focused ? Colors.common.twitter : Colors.common.gray2}
+                color={
+                  focused ? Colors[colorScheme].tabIconSelected : Colors[colorScheme].tabIconDefault
+                }
               />
             ),
           })}
@@ -133,7 +140,9 @@ function BottomTabNavigator() {
               <AntDesign
                 name="search1"
                 size={25}
-                color={focused ? Colors.common.twitter : Colors.common.gray2}
+                color={
+                  focused ? Colors[colorScheme].tabIconSelected : Colors[colorScheme].tabIconDefault
+                }
               />
             ),
           }}
@@ -147,7 +156,9 @@ function BottomTabNavigator() {
               <Feather
                 name="bell"
                 size={25}
-                color={focused ? Colors.common.twitter : Colors.common.gray2}
+                color={
+                  focused ? Colors[colorScheme].tabIconSelected : Colors[colorScheme].tabIconDefault
+                }
               />
             ),
           }}
@@ -162,7 +173,9 @@ function BottomTabNavigator() {
               <SimpleLineIcons
                 name="envelope-letter"
                 size={25}
-                color={focused ? Colors.common.twitter : Colors.common.gray2}
+                color={
+                  focused ? Colors[colorScheme].tabIconSelected : Colors[colorScheme].tabIconDefault
+                }
               />
             ),
           }}

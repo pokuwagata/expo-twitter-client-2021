@@ -4,18 +4,22 @@ import Colors from '../constants/Colors';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { Feather, AntDesign, Entypo } from '@expo/vector-icons';
+import useColorScheme from '../hooks/useColorScheme';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
+  const colorScheme = useColorScheme();
+  const iconColor = Colors[colorScheme].tweet.buttonIcon;
+
   return (
     <View style={styles.container}>
-      <View style={styles.userIcon} />
+      <View style={[styles.userIcon, { backgroundColor: Colors[colorScheme].tweet.userIcon }]} />
       <View style={styles.tweet}>
         <View style={styles.header}>
           <View style={styles.userNames}>
             <Text style={styles.userName}>食楽園〜幸福に空腹を満たす</Text>
-            <Text style={styles.time}>28分</Text>
+            <Text style={[styles.time, { color: Colors[colorScheme].tweet.timeText }]}>28分</Text>
           </View>
-          <Entypo name="dots-three-horizontal" size={20} color={Colors.common.gray3} />
+          <Entypo name="dots-three-horizontal" size={20} color={Colors[colorScheme].tweet.dots} />
         </View>
         <Text style={styles.text}>ポークスペアリブ</Text>
         <Image
@@ -26,18 +30,22 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       <EditScreenInfo path="/screens/TabOneScreen.tsx" /> */}
         <View style={styles.buttons}>
           <View style={styles.button}>
-            <Feather name="message-circle" size={20} color="black" />
+            <Feather name="message-circle" size={20} color={iconColor} />
           </View>
           <View style={styles.button}>
-            <AntDesign name="retweet" size={20} color="black" />
-            <Text style={styles.buttonText}>21</Text>
+            <AntDesign name="retweet" size={20} color={iconColor} />
+            <Text style={[styles.buttonText, { color: Colors[colorScheme].tweet.buttonIcon }]}>
+              21
+            </Text>
           </View>
           <View style={styles.button}>
-            <AntDesign name="hearto" size={20} color="black" />
-            <Text style={styles.buttonText}>118</Text>
+            <AntDesign name="hearto" size={20} color={iconColor} />
+            <Text style={[styles.buttonText, { color: Colors[colorScheme].tweet.buttonIcon }]}>
+              118
+            </Text>
           </View>
           <View style={styles.button}>
-            <Entypo name="share-alternative" size={20} color="black" />
+            <Entypo name="share-alternative" size={20} color={iconColor} />
           </View>
         </View>
       </View>
@@ -55,7 +63,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: Colors.common.gray2,
     marginRight: 5,
   },
   tweet: {
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 16,
-    color: Colors.common.gray3,
   },
   text: {
     fontSize: 18,
