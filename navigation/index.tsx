@@ -32,6 +32,9 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native';
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
 
