@@ -22,6 +22,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 import { FloatButton } from '../components/FloatButton';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -31,9 +32,7 @@ import TabOneScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
-
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScrollView } from 'react-native';
+import Menu from '../components/Menu';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
@@ -52,21 +51,19 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   );
 }
 
-/**
- * A root stack navigator is often used for displaying modals on top of all other content.
- * https://reactnavigation.org/docs/modal
- */
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+    <Drawer.Navigator initialRouteName="Root" drawerContent={(props) => <Menu {...props} />}>
+      <Drawer.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      {/* <Drawer.Screen name="Menu" component={MenuScreen} /> */}
+      {/* <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
+      </Stack.Group> */}
+    </Drawer.Navigator>
   );
 }
 
@@ -91,12 +88,14 @@ function BottomTabNavigator() {
             borderBottomWidth: 1,
           },
           headerLeft: () => (
-            <MaterialIcons
-              name="account-circle"
-              size={25}
-              color={Colors[colorScheme].headerIcon}
-              style={{ marginLeft: 10 }}
-            />
+            <Pressable onPress={() => navigation.openDrawer()}>
+              <MaterialIcons
+                name="account-circle"
+                size={25}
+                color={Colors[colorScheme].headerIcon}
+                style={{ marginLeft: 10 }}
+              />
+            </Pressable>
           ),
           headerTitle: () => (
             <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
