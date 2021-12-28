@@ -18,7 +18,7 @@ import {
   DarkTheme,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import { TransitionSpecs, createStackNavigator } from '@react-navigation/stack';
+import { TransitionSpecs, createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, Button } from 'react-native';
 import { FloatButton } from '../components/FloatButton';
@@ -34,6 +34,7 @@ import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Menu from '../components/Menu';
 import TweetEditScreen from '../screens/TweetEditScreen';
+import { View } from '../components/Themed';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
@@ -45,7 +46,16 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
         theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
         ref={navigationRef}
       >
-        <RootNavigator />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Drawer" component={DrawerNavigator} />
+          <Stack.Screen
+            name="TweetEdit"
+            component={TweetEditScreen}
+            options={{
+              ...TransitionPresets.ModalSlideFromBottomIOS,
+            }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
       <FloatButton navigationRef={navigationRef} />
     </>
@@ -55,55 +65,23 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator();
 
-function RootNavigator() {
+function DrawerNavigator() {
   const scheme = Colors[useColorScheme()];
 
   return (
-    <>
-      <Drawer.Navigator
-        initialRouteName="Root"
-        drawerContent={(props) => <Menu {...props} />}
-        screenOptions={{ drawerStyle: { backgroundColor: scheme.background } }}
-      >
-        <Drawer.Screen
-          name="Root"
-          component={BottomTabNavigator}
-          options={{ headerShown: false }}
-        />
-        <Drawer.Screen
-          name="TweetEdit"
-          component={TweetEditNavigator}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Drawer.Navigator>
-    </>
-  );
-}
-
-function TweetEditNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="test"
-        component={({ navigation }) => (
-          <Button onPress={() => navigation.navigate('Home')} title="test" />
-        )}
-      />
-      <Stack.Screen
-        name="TweetEdit2"
-        key="TweetEdit"
-        component={TweetEditScreen}
+    <Drawer.Navigator
+      initialRouteName="Root"
+      drawerContent={(props) => <Menu {...props} />}
+      screenOptions={{ drawerStyle: { backgroundColor: scheme.background } }}
+    >
+      <Drawer.Screen
+        name="Root"
+        component={BottomTabNavigator}
         options={{
           headerShown: false,
-          transitionSpec: {
-            open: TransitionSpecs.TransitionIOSSpec,
-            close: TransitionSpecs.TransitionIOSSpec,
-          },
         }}
       />
-    </Stack.Navigator>
+    </Drawer.Navigator>
   );
 }
 
@@ -123,37 +101,37 @@ function BottomTabNavigator() {
         screenOptions={({ navigation }) => ({
           tabBarActiveTintColor: Colors[colorScheme].tint,
           tabBarShowLabel: false,
+          headerShown: true,
           headerStyle: {
             borderBottomColor: Colors[colorScheme].headerBottom,
             borderBottomWidth: 1,
+            backgroundColor: 'pink',
           },
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.openDrawer()}>
-              <MaterialIcons
-                name="account-circle"
-                size={25}
-                color={Colors[colorScheme].headerIcon}
-                style={{ marginLeft: 10 }}
-              />
-            </Pressable>
-          ),
-          headerTitle: () => (
-            <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
-          ),
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="star"
-                size={25}
-                color={Colors[colorScheme].headerIcon}
-                style={{ marginRight: 10 }}
-              />
-            </Pressable>
+          header: () => (
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Pressable onPress={() => navigation.openDrawer()}>
+                <MaterialIcons
+                  name="account-circle"
+                  size={25}
+                  color={Colors[colorScheme].headerIcon}
+                  style={{ marginLeft: 10 }}
+                />
+              </Pressable>
+              <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
+              <Pressable
+                onPress={() => navigation.navigate('Modal')}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <FontAwesome
+                  name="star"
+                  size={25}
+                  color={Colors[colorScheme].headerIcon}
+                  style={{ marginRight: 10 }}
+                />
+              </Pressable>
+            </View>
           ),
         })}
       >

@@ -59,6 +59,7 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
           onChangeText={(text) => onChangeText(text)}
           value={value}
           style={{ flex: 1, fontSize: 20 }}
+          autoFocus
           showSoftInputOnFocus
           placeholder="いまどうしてる？"
           placeholderTextColor={colors.gray[500]}
