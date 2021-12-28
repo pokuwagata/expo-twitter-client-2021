@@ -18,9 +18,9 @@ import {
   DarkTheme,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TransitionSpecs, createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Button } from 'react-native';
 import { FloatButton } from '../components/FloatButton';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -33,6 +33,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Menu from '../components/Menu';
+import TweetEditScreen from '../screens/TweetEditScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
@@ -51,25 +52,58 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator();
 
 function RootNavigator() {
   const scheme = Colors[useColorScheme()];
 
   return (
-    <Drawer.Navigator
-      initialRouteName="Root"
-      drawerContent={(props) => <Menu {...props} />}
-      screenOptions={{ drawerStyle: { backgroundColor: scheme.background } }}
-    >
-      <Drawer.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      {/* <Drawer.Screen name="Menu" component={MenuScreen} /> */}
-      {/* <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group> */}
-    </Drawer.Navigator>
+    <>
+      <Drawer.Navigator
+        initialRouteName="Root"
+        drawerContent={(props) => <Menu {...props} />}
+        screenOptions={{ drawerStyle: { backgroundColor: scheme.background } }}
+      >
+        <Drawer.Screen
+          name="Root"
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Drawer.Screen
+          name="TweetEdit"
+          component={TweetEditNavigator}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Drawer.Navigator>
+    </>
+  );
+}
+
+function TweetEditNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="test"
+        component={({ navigation }) => (
+          <Button onPress={() => navigation.navigate('Home')} title="test" />
+        )}
+      />
+      <Stack.Screen
+        name="TweetEdit2"
+        key="TweetEdit"
+        component={TweetEditScreen}
+        options={{
+          headerShown: false,
+          transitionSpec: {
+            open: TransitionSpecs.TransitionIOSSpec,
+            close: TransitionSpecs.TransitionIOSSpec,
+          },
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 

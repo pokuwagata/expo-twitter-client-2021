@@ -11,16 +11,19 @@ type Props = {
 
 export function FloatButton({ navigationRef }: Props) {
   const colorScheme = useColorScheme();
-  const [key, setKey] = useState<string | undefined>();
+  const [screenName, setScreenName] = useState<string | undefined>();
   useEffect(() => {
     navigationRef?.addListener('state', () => {
-      setKey(navigationRef.getCurrentRoute()?.name);
+      setScreenName(navigationRef.getCurrentRoute()?.name);
     });
   }, [navigationRef]);
+
+  if (screenName === 'TweetEdit') return null;
 
   return (
     <Pressable
       onPress={() => {
+        navigationRef?.navigate('TweetEdit');
         // setTimesPressed((current) => current + 1);
       }}
       style={({ pressed }) => [
@@ -29,15 +32,7 @@ export function FloatButton({ navigationRef }: Props) {
         { backgroundColor: Colors[colorScheme].floatButton.bgColor },
       ]}
     >
-      {key === 'Message' ? (
-        <MaterialCommunityIcons
-          name="pencil-box-outline"
-          size={24}
-          color={Colors[colorScheme].floatButton.color}
-        />
-      ) : (
-        <Entypo name="pencil" size={24} color={Colors[colorScheme].floatButton.color} />
-      )}
+      <Entypo name="pencil" size={24} color={Colors[colorScheme].floatButton.color} />
     </Pressable>
   );
 }

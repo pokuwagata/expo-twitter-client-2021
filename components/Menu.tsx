@@ -11,13 +11,13 @@ export default function MenuScreen({ navigation }: any) {
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: scheme.background }} />
       <View
         style={{
           marginVertical: 20,
           paddingHorizontal: 10,
           justifyContent: 'space-between',
           flex: 1,
+          backgroundColor: scheme.background,
         }}
       >
         <View>
