@@ -18,8 +18,8 @@ export const colors = {
 
 export default {
   light: {
-    text: '#000',
-    background: '#fff',
+    text: colors.black,
+    background: colors.white,
     tint: colors.twitter,
     tabIconDefault: colors.gray[600],
     tabIconSelected: colors.twitter,
@@ -33,10 +33,14 @@ export default {
       color: colors.white,
       bgColor: colors.twitter,
     },
+    drawer: {
+      grayText: colors.gray[500],
+      icon: colors.gray[500],
+    },
   },
   dark: {
-    text: '#fff',
-    background: '#000',
+    text: colors.white,
+    background: colors.black,
     tint: colors.twitter,
     tabIconDefault: colors.gray[600],
     tabIconSelected: colors.twitter,
@@ -50,9 +54,9 @@ export default {
       color: colors.white,
       bgColor: colors.twitter,
     },
-  },
-  common: {
-    black: '#000',
-    white: '#fff',
+    drawer: {
+      grayText: colors.gray[400],
+      icon: colors.gray[400],
+    },
   },
 };

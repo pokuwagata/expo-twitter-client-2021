@@ -24,7 +24,7 @@ import { ColorSchemeName, Pressable } from 'react-native';
 import { FloatButton } from '../components/FloatButton';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Colors from '../constants/Colors';
+import Colors, { colors } from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -55,8 +55,14 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator();
 
 function RootNavigator() {
+  const scheme = Colors[useColorScheme()];
+
   return (
-    <Drawer.Navigator initialRouteName="Root" drawerContent={(props) => <Menu {...props} />}>
+    <Drawer.Navigator
+      initialRouteName="Root"
+      drawerContent={(props) => <Menu {...props} />}
+      screenOptions={{ drawerStyle: { backgroundColor: scheme.background } }}
+    >
       <Drawer.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       {/* <Drawer.Screen name="Menu" component={MenuScreen} /> */}
       {/* <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />

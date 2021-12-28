@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
-import Colors from '../constants/Colors';
+import Colors, { colors } from '../constants/Colors';
 import { NavigationContainerRef } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import useColorScheme from '../hooks/useColorScheme';
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: Colors.common.black,
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 5,
