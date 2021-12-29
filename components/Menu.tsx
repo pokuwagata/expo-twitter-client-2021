@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from './Themed';
 import Colors, { colors } from '../constants/Colors';
 import { Entypo, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import useColorScheme from '../hooks/useColorScheme';
+import Typography from '../constants/Typography';
 
 export default function MenuScreen({ navigation }: any) {
   const scheme = Colors[useColorScheme()];
@@ -61,7 +61,7 @@ export default function MenuScreen({ navigation }: any) {
             </View>
           </View>
           <View style={{ marginTop: 10, marginBottom: 10 }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 }}>泉鏡花</Text>
+            <Text style={{ fontWeight: 'bold', fontSize: Typography.fontSizes.lg }}>泉鏡花</Text>
             <Text style={{ color: scheme.drawer.grayText }}>@izumi_kyoka</Text>
           </View>
           <View style={{ flexDirection: 'row', marginBottom: 30 }}>
@@ -102,11 +102,11 @@ export default function MenuScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   followCount: {
     marginRight: 5,
-    fontSize: 15,
+    fontSize: Typography.fontSizes.sm,
     fontWeight: 'bold',
   },
   followLabel: {
-    fontSize: 15,
+    fontSize: Typography.fontSizes.sm,
   },
   item: {
     flexDirection: 'row',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     color: colors.gray[400],
   },
   itemIconLabel: {
-    fontSize: 18,
+    fontSize: Typography.fontSizes.lg,
   },
   bottomIcon: {
     fontSize: 30,

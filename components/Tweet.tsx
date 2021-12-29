@@ -1,5 +1,6 @@
 import { StyleSheet, Image } from 'react-native';
 import Colors, { colors } from '../constants/Colors';
+import Typography from '../constants/Typography';
 
 import { Text, View } from './Themed';
 import { Feather, AntDesign, Entypo } from '@expo/vector-icons';

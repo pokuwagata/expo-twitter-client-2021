@@ -1,8 +1,9 @@
 import { RootTabScreenProps } from '../types';
 import { View, Text } from '../components/Themed';
-import { Button, Pressable, TextInput } from 'react-native';
+import { Pressable, TextInput } from 'react-native';
 import { useState } from 'react';
 import { colors } from '../constants/Colors';
+import Typography from '../constants/Typography';
 
 export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>) {
   const [value, onChangeText] = useState('');
@@ -18,7 +19,9 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
         }}
       >
         <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
-          <Text style={{ color: colors.twitter[500], fontSize: 16 }}>キャンセル</Text>
+          <Text style={{ color: colors.twitter[500], fontSize: Typography.fontSizes.md }}>
+            キャンセル
+          </Text>
         </Pressable>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
@@ -37,7 +40,10 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
               height: 35,
             }}
           >
-            <Text style={{ color: colors.white, fontSize: 16 }} allowFontScaling={false}>
+            <Text
+              style={{ color: colors.white, fontSize: Typography.fontSizes.md }}
+              allowFontScaling={false}
+            >
               ツイートする
             </Text>
           </Pressable>
@@ -58,7 +64,7 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
           numberOfLines={4}
           onChangeText={(text) => onChangeText(text)}
           value={value}
-          style={{ flex: 1, fontSize: 20 }}
+          style={{ flex: 1, fontSize: Typography.fontSizes.lg }}
           autoFocus
           showSoftInputOnFocus
           placeholder="いまどうしてる？"
