@@ -50,13 +50,13 @@ export default function MenuScreen({ navigation }: any) {
                   width: 30,
                   height: 30,
                   borderRadius: 15,
-                  borderColor: colors.twitter,
+                  borderColor: colors.twitter[500],
                   borderWidth: 2,
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
               >
-                <Entypo name="dots-three-horizontal" size={20} color={colors.twitter} />
+                <Entypo name="dots-three-horizontal" size={20} color={colors.twitter[500]} />
               </View>
             </View>
           </View>
@@ -123,6 +123,6 @@ const styles = StyleSheet.create({
   },
   bottomIcon: {
     fontSize: 30,
-    color: colors.twitter,
+    color: colors.twitter[500],
   },
 });

@@ -18,18 +18,18 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
         }}
       >
         <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
-          <Text style={{ color: colors.twitter, fontSize: 16 }}>キャンセル</Text>
+          <Text style={{ color: colors.twitter[500], fontSize: 16 }}>キャンセル</Text>
         </Pressable>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
-            <Text style={{ color: colors.twitter, fontSize: 16 }} allowFontScaling={false}>
+            <Text style={{ color: colors.twitter[500], fontSize: 16 }} allowFontScaling={false}>
               下書き
             </Text>
           </Pressable>
           <Pressable
             onPress={() => navigation.goBack()}
             style={{
-              backgroundColor: colors.twitter,
+              backgroundColor: colors.twitter[500],
               borderRadius: 17,
               paddingHorizontal: 10,
               alignItems: 'center',

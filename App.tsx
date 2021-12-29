@@ -4,6 +4,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
+import Colors from './constants/Colors';
+import { View } from './components/Themed';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -14,9 +16,12 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <StatusBar />
-        <SafeAreaView style={{ marginBottom: 10 }} />
-        <Navigation colorScheme={colorScheme} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors[colorScheme].background }}>
+          <View style={{ marginBottom: 15 }}>
+            <StatusBar />
+          </View>
+          <Navigation colorScheme={colorScheme} />
+        </SafeAreaView>
       </SafeAreaProvider>
     );
   }
