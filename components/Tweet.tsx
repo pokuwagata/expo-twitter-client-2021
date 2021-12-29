@@ -116,12 +116,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   displayName: {
-    fontSize: 16,
+    fontSize: Typography.fontSizes.md,
     fontWeight: 'bold',
     paddingRight: 5,
   },
   userName: {
-    fontSize: 16,
+    fontSize: Typography.fontSizes.md,
     color: colors.gray[400],
     flexShrink: 1,
   },
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   time: {
-    fontSize: 16,
+    fontSize: Typography.fontSizes.md,
     color: colors.gray[400],
     paddingLeft: 5,
     flexShrink: 1,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   text: {
-    fontSize: 18,
+    fontSize: Typography.fontSizes.lg,
   },
   image: {
     maxWidth: '100%',
