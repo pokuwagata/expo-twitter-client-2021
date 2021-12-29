@@ -4,34 +4,34 @@
  */
 
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-
-declare global {
-  namespace ReactNavigation {
-    type RootParamList = RootStackParamList;
-  }
-}
+import { CompositeScreenProps } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
+  Drawer: undefined;
+  TweetEdit: undefined;
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type DrawerNavigatorParamList = {
+  Root: BottomTabScreenProps<BottomTabParamList>;
+};
 
-export type RootTabParamList = {
+export type BottomTabParamList = {
   Home: undefined;
   Search: undefined;
   Notice: undefined;
   Message: undefined;
 };
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
+export type DrawerNavigatorScreenProps = CompositeScreenProps<
+  DrawerScreenProps<DrawerNavigatorParamList, 'Root'>,
+  StackScreenProps<RootStackParamList>
 >;
+
+export type BottomTabScreenCustomProps<Screen extends keyof BottomTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<BottomTabParamList, Screen>,
+    DrawerNavigatorScreenProps
+  >;

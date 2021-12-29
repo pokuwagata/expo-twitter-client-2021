@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet } from 'react-native';
-import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import Colors, { colors } from '../constants/Colors';
 import { NavigationContainerRef } from '@react-navigation/native';
 import { useEffect, useState } from 'react';

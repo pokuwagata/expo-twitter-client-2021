@@ -10,6 +10,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
+    "lint:tsc": "tsc -p . --noEmit",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier .",
     "fix:eslint": "yarn lint:eslint --fix",

@@ -28,7 +28,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList } from '../types';
+import { BottomTabParamList, DrawerNavigatorParamList, RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import Menu from '../components/Menu';
 import TweetEditScreen from '../screens/TweetEditScreen';
@@ -61,7 +61,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 
 function DrawerNavigator() {
   const scheme = Colors[useColorScheme()];
@@ -87,7 +87,7 @@ function DrawerNavigator() {
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();

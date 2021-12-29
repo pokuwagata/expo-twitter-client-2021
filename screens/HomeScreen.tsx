@@ -1,8 +1,8 @@
-import { RootTabScreenProps } from '../types';
+import { BottomTabScreenCustomProps } from '../types';
 import Tweet from '../components/Tweet';
 import { ScrollView } from 'react-native';
 
-export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
+export default function HomeScreen({ navigation }: BottomTabScreenCustomProps<'Home'>) {
   return (
     <>
       <ScrollView>
