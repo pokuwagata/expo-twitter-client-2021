@@ -18,17 +18,15 @@ import {
   DarkTheme,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import { TransitionSpecs, createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable, Button } from 'react-native';
+import { ColorSchemeName, Pressable } from 'react-native';
 import { FloatButton } from '../components/FloatButton';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Colors, { colors } from '../constants/Colors';
+import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
-import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -105,7 +103,6 @@ function BottomTabNavigator() {
           headerStyle: {
             borderBottomColor: Colors[colorScheme].headerBottom,
             borderBottomWidth: 1,
-            backgroundColor: 'pink',
           },
           header: () => (
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -119,7 +116,7 @@ function BottomTabNavigator() {
               </Pressable>
               <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
               <Pressable
-                onPress={() => navigation.navigate('Modal')}
+                // onPress={() => navigation.navigate('Modal')}
                 style={({ pressed }) => ({
                   opacity: pressed ? 0.5 : 1,
                 })}
@@ -137,7 +134,7 @@ function BottomTabNavigator() {
       >
         <BottomTab.Screen
           name="Home"
-          component={TabOneScreen}
+          component={HomeScreen}
           options={() => ({
             title: 'home',
             tabBarIcon: ({ focused }) => (
