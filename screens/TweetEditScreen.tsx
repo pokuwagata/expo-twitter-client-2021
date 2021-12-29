@@ -1,31 +1,35 @@
-import { RootTabScreenProps } from '../types';
 import { View, Text } from '../components/Themed';
 import { Pressable, TextInput } from 'react-native';
 import { useState } from 'react';
 import { colors } from '../constants/Colors';
 import Typography from '../constants/Typography';
+import { spacing } from '../constants/Spacing';
+import { RootStackProps } from '../types';
 
-export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>) {
+export default function TweetEditScreen({ navigation }: RootStackProps<'TweetEdit'>) {
   const [value, onChangeText] = useState('');
 
   return (
-    <View style={{ flex: 1, paddingHorizontal: 10 }}>
+    <View style={{ flex: 1, paddingHorizontal: spacing[2] }}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginBottom: 10,
+          marginBottom: spacing[2],
         }}
       >
-        <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
+        <Pressable onPress={() => navigation.goBack()} style={{ marginRight: spacing[3] }}>
           <Text style={{ color: colors.twitter[500], fontSize: Typography.fontSizes.md }}>
             キャンセル
           </Text>
         </Pressable>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Pressable onPress={() => navigation.goBack()} style={{ marginRight: 15 }}>
-            <Text style={{ color: colors.twitter[500], fontSize: 16 }} allowFontScaling={false}>
+          <Pressable onPress={() => navigation.goBack()} style={{ marginRight: spacing[3] }}>
+            <Text
+              style={{ color: colors.twitter[500], fontSize: Typography.fontSizes.md }}
+              allowFontScaling={false}
+            >
               下書き
             </Text>
           </Pressable>
@@ -34,7 +38,7 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
             style={{
               backgroundColor: colors.twitter[500],
               borderRadius: 17,
-              paddingHorizontal: 10,
+              paddingHorizontal: spacing[2],
               alignItems: 'center',
               justifyContent: 'center',
               height: 35,
@@ -55,7 +59,7 @@ export default function TweetEditScreen({ navigation }: RootTabScreenProps<any>)
             width: 30,
             height: 30,
             borderRadius: 15,
-            marginRight: 10,
+            marginRight: spacing[2],
             backgroundColor: colors.gray[600],
           }}
         />

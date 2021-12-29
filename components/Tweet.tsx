@@ -5,6 +5,7 @@ import Typography from '../constants/Typography';
 import { Text, View } from './Themed';
 import { Feather, AntDesign, Entypo } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
+import { spacing } from '../constants/Spacing';
 
 type Props = {
   displayName: string;
@@ -92,15 +93,15 @@ export default function Tweet({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingHorizontal: spacing[4],
+    paddingVertical: spacing[2],
     borderBottomWidth: 1,
   },
   userIcon: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    marginRight: 5,
+    marginRight: spacing[1],
     backgroundColor: colors.gray[600],
   },
   tweet: {
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
   displayName: {
     fontSize: Typography.fontSizes.md,
     fontWeight: 'bold',
-    paddingRight: 5,
+    paddingRight: spacing[1],
   },
   userName: {
     fontSize: Typography.fontSizes.md,
@@ -134,11 +135,11 @@ const styles = StyleSheet.create({
   time: {
     fontSize: Typography.fontSizes.md,
     color: colors.gray[400],
-    paddingLeft: 5,
+    paddingLeft: spacing[1],
     flexShrink: 1,
   },
   dots: {
-    paddingLeft: 10,
+    paddingLeft: spacing[2],
   },
   text: {
     fontSize: Typography.fontSizes.lg,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
   image: {
     maxWidth: '100%',
     height: 200,
-    marginVertical: 10,
+    marginVertical: spacing[2],
     borderRadius: 10,
   },
   buttons: {
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
     flexBasis: 50,
   },
   buttonText: {
-    paddingLeft: 10,
+    paddingLeft: spacing[2],
     color: colors.gray[500],
   },
 });

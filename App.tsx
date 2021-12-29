@@ -6,6 +6,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import Colors from './constants/Colors';
 import { View } from './components/Themed';
+import { spacing } from './constants/Spacing';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -17,7 +18,7 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <SafeAreaView style={{ flex: 1, backgroundColor: Colors[colorScheme].background }}>
-          <View style={{ marginBottom: 15 }}>
+          <View style={{ marginBottom: spacing[3] }}>
             <StatusBar />
           </View>
           <Navigation colorScheme={colorScheme} />

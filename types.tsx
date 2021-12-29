@@ -14,6 +14,11 @@ export type RootStackParamList = {
   NotFound: undefined;
 };
 
+export type RootStackProps<Screen extends keyof RootStackParamList> = StackScreenProps<
+  RootStackParamList,
+  Screen
+>;
+
 export type DrawerNavigatorParamList = {
   Root: BottomTabScreenProps<BottomTabParamList>;
 };

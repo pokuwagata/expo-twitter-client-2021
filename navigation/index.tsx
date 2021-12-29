@@ -33,6 +33,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import Menu from '../components/Menu';
 import TweetEditScreen from '../screens/TweetEditScreen';
 import { View } from '../components/Themed';
+import { spacing } from '../constants/Spacing';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
@@ -111,7 +112,7 @@ function BottomTabNavigator() {
                   name="account-circle"
                   size={25}
                   color={Colors[colorScheme].headerIcon}
-                  style={{ marginLeft: 10 }}
+                  style={{ marginLeft: spacing[2] }}
                 />
               </Pressable>
               <FontAwesome name="twitter" size={25} color={Colors[colorScheme].headerIcon} />
@@ -125,7 +126,7 @@ function BottomTabNavigator() {
                   name="star"
                   size={25}
                   color={Colors[colorScheme].headerIcon}
-                  style={{ marginRight: 10 }}
+                  style={{ marginRight: spacing[2] }}
                 />
               </Pressable>
             </View>

@@ -4,6 +4,7 @@ import Colors, { colors } from '../constants/Colors';
 import { Entypo, MaterialCommunityIcons, AntDesign, Ionicons } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 import Typography from '../constants/Typography';
+import { spacing } from '../constants/Spacing';
 
 export default function MenuScreen({ navigation }: any) {
   const scheme = Colors[useColorScheme()];
@@ -13,8 +14,8 @@ export default function MenuScreen({ navigation }: any) {
     <>
       <View
         style={{
-          marginVertical: 20,
-          paddingHorizontal: 10,
+          marginVertical: spacing[4],
+          paddingHorizontal: spacing[2],
           justifyContent: 'space-between',
           flex: 1,
           backgroundColor: scheme.background,
@@ -27,7 +28,7 @@ export default function MenuScreen({ navigation }: any) {
                 width: 60,
                 height: 60,
                 borderRadius: 30,
-                marginRight: 5,
+                marginRight: spacing[1],
                 backgroundColor: colors.gray[600],
               }}
             />
@@ -41,7 +42,7 @@ export default function MenuScreen({ navigation }: any) {
                   width: 30,
                   height: 30,
                   borderRadius: 15,
-                  marginRight: 15,
+                  marginRight: spacing[3],
                   backgroundColor: colors.gray[600],
                 }}
               />
@@ -60,12 +61,12 @@ export default function MenuScreen({ navigation }: any) {
               </View>
             </View>
           </View>
-          <View style={{ marginTop: 10, marginBottom: 10 }}>
+          <View style={{ marginVertical: spacing[2] }}>
             <Text style={{ fontWeight: 'bold', fontSize: Typography.fontSizes.lg }}>泉鏡花</Text>
             <Text style={{ color: scheme.drawer.grayText }}>@izumi_kyoka</Text>
           </View>
-          <View style={{ flexDirection: 'row', marginBottom: 30 }}>
-            <View style={{ flexDirection: 'row', marginRight: 10 }}>
+          <View style={{ flexDirection: 'row', marginBottom: spacing[6] }}>
+            <View style={{ flexDirection: 'row', marginRight: spacing[2] }}>
               <Text style={styles.followCount}>44</Text>
               <Text style={[styles.followLabel, { color: scheme.drawer.grayText }]}>フォロー</Text>
             </View>
@@ -101,7 +102,7 @@ export default function MenuScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   followCount: {
-    marginRight: 5,
+    marginRight: spacing[1],
     fontSize: Typography.fontSizes.sm,
     fontWeight: 'bold',
   },
@@ -111,11 +112,11 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: spacing[4],
   },
   itemIcon: {
     fontSize: 30,
-    marginRight: 20,
+    marginRight: spacing[2],
     color: colors.gray[400],
   },
   itemIconLabel: {
