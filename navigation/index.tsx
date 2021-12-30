@@ -34,6 +34,7 @@ import Menu from '../components/Menu';
 import TweetEditScreen from '../screens/TweetEditScreen';
 import { View } from '../components/Themed';
 import { spacing } from '../constants/Spacing';
+import ImageViewScreen from '../screens/ImageViewScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const navigationRef = useNavigationContainerRef();
@@ -53,6 +54,11 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
             options={{
               ...TransitionPresets.ModalSlideFromBottomIOS,
             }}
+          />
+          <Stack.Screen
+            name="ImageView"
+            component={ImageViewScreen}
+            options={{ presentation: 'modal' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

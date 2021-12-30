@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, Pressable, Animated } from 'react-native';
 import Colors, { colors } from '../constants/Colors';
 import Typography from '../constants/Typography';
 
@@ -6,6 +6,8 @@ import { Text, View } from './Themed';
 import { Feather, AntDesign, Entypo } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 import { spacing } from '../constants/Spacing';
+import { useRef, useState } from 'react';
+import Layout from '../constants/Layout';
 
 type Props = {
   displayName: string;
@@ -31,8 +33,42 @@ export default function Tweet({
   const scheme = Colors[colorScheme];
   const iconColor = scheme.tweet.buttonIcon;
 
+  const [imageShown, setImageShown] = useState(false);
+  const animatedImageXY = useRef(new Animated.ValueXY({ x: 0, y: 0 })).current;
+  const animatedImageScaleXY = useRef(new Animated.ValueXY({ x: 1, y: 1 })).current;
+  const imageRef = useRef<any>();
+
+  const showImage = () => {
+    setImageShown(true);
+    const screenHeight = Layout.window.height;
+    const screenWidth = Layout.window.width;
+
+    imageRef.current.measureInWindow((x, y, width, height) => {
+      Animated.parallel([
+        Animated.timing(animatedImageXY, {
+          toValue: {
+            x: screenWidth / 2 - width / 2 - x,
+            y: screenHeight / 2 - height / 2 - y,
+          },
+          duration: 300,
+          useNativeDriver: false,
+        }),
+        Animated.timing(animatedImageScaleXY, {
+          toValue: { x: screenWidth / width, y: 1.5 },
+          duration: 0.5,
+          useNativeDriver: false,
+        }),
+      ]).start();
+    });
+  };
+
   return (
-    <View style={[styles.container, { borderBottomColor: scheme.tweet.border }]}>
+    <View
+      style={[
+        styles.container,
+        { borderBottomColor: scheme.tweet.border, zIndex: imageShown ? 5 : undefined },
+      ]}
+    >
       <View style={styles.userIcon} />
       <View style={styles.tweet}>
         <View style={styles.header}>
@@ -55,7 +91,25 @@ export default function Tweet({
           </View>
         </View>
         <Text style={styles.text}>{text}</Text>
-        {imagePath && <Image style={styles.image} source={{ uri: imagePath }} />}
+        {imagePath && (
+          <Pressable onPress={showImage} style={{ zIndex: imageShown ? 5 : undefined }}>
+            <Animated.Image
+              ref={imageRef}
+              style={[
+                styles.image,
+                {
+                  transform: [
+                    { translateX: animatedImageXY.x },
+                    { translateY: animatedImageXY.y },
+                    { scaleX: animatedImageScaleXY.x },
+                    { scaleY: animatedImageScaleXY.y },
+                  ],
+                },
+              ]}
+              source={{ uri: imagePath }}
+            />
+          </Pressable>
+        )}
         <View style={styles.buttons}>
           <View style={styles.button}>
             <Feather name="message-circle" size={20} color={iconColor} />

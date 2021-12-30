@@ -11,6 +11,7 @@ import { DrawerScreenProps } from '@react-navigation/drawer';
 export type RootStackParamList = {
   Drawer: undefined;
   TweetEdit: undefined;
+  ImageView: undefined;
   NotFound: undefined;
 };
 
